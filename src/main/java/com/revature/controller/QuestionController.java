@@ -5,10 +5,12 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +20,7 @@ import com.revature.services.QuestionService;
 
 @RestController
 @RequestMapping("/questions")
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.PUT, 			RequestMethod.PATCH, RequestMethod.POST},allowedHeaders = {"Content-Type"})
 public class QuestionController {
 
 	@Autowired
@@ -32,7 +35,7 @@ public class QuestionController {
 
 	// issue Ambiguous handler method
 	/**@author ken*/
-	@GetMapping("/{statusId}")
+	@GetMapping("/status/{status}")
 	public Page<Question> getAllQuestionsByStatus(Pageable pageable, @PathVariable boolean status)
 	{
 		return questionService.getAllQuestionsByStatus(pageable, status);
@@ -65,7 +68,7 @@ public class QuestionController {
 	
 	// issue Ambiguous handler method
 	/** @Author Natasha Poser */
-	@GetMapping("/{id}")
+	@GetMapping("/questionid/{id}")
 	public Question getQuestionByQuestionId(@PathVariable int id) {
 		return questionService.findById(id);
 	}

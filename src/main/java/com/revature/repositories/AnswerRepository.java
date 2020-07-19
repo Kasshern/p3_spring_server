@@ -11,7 +11,7 @@ import com.revature.entities.Answer;
 public interface AnswerRepository extends JpaRepository<Answer, Integer>{
 
 	/** @author Natasha Poser */
-	Page<Answer> getAnswerByQuestionId(Pageable pageable, int question_id);
+	Page<Answer> getAllAnswersByQuestionId(Pageable pageable, int questionId);
 	
 
 	/**@author ken */
